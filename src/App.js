@@ -1,23 +1,35 @@
-import logo from './logo.svg';
 import './App.css';
+import AuthenticatedApp from './components/AuthenticatedApp';
+import UnauthenticatedApp from './components/UnauthenticatedApp';
+import { useAuth } from './hooks/useAuth';
+import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import { Landing } from './components/Landing';
+import { ChatRoom } from './components/ChatRoom';
+
+const routes = createBrowserRouter([
+  {
+    path: '/',
+    element: <Landing />,
+  },
+  {
+    path: '/room/:id',
+    element: <ChatRoom />,
+  },
+]);
 
 function App() {
+  const { user } = useAuth();
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className='container'>
+      <h1>💬 Chat Room</h1>
+      {user ? (
+        <RouterProvider router={routes}>
+          <AuthenticatedApp />
+        </RouterProvider>
+      ) : (
+        <UnauthenticatedApp />
+      )}
     </div>
   );
 }

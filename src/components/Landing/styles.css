@@ -1,0 +1,20 @@
+.chat-room-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.chat-room-list .li {
+  height: 100px;
+  width: 300px;
+  background: var(--color-gray);
+  flex: 1 1 calc(50% - 4px);
+  border-radius: var(--border-radius);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.chat-room-list .li:hover {
+  background-color: rgba(240, 248, 255, 0.26);
+}
